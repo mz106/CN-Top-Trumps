@@ -1,6 +1,8 @@
 
-let newWarrior;
-let selectedAttribute;
+const prompt = require("prompt-sync")({sigint: true}); 
+
+let nameOne = prompt('Player one, enter your name: ');
+let nameTwo = prompt('Player two, enter your name: ');
 
 class Character {
     constructor(health, strength, agility, intelligence, mana) {
@@ -67,9 +69,9 @@ class Character {
 };
 
 class Warrior extends Character {
-    constructor(health, strength, agility, intelligence, mana) {
+    constructor(type, health, strength, agility, intelligence, mana) {
         super(health, strength, agility, intelligence, mana);
-
+        this._type = 'Warrior';
         this._health = 8;
         this._strength = 9;
         this._agility = 8;
@@ -79,9 +81,9 @@ class Warrior extends Character {
 };
 
 class Wizard extends Character {
-    constructor(health, strength, agility, intelligence, mana) {
+    constructor(type, health, strength, agility, intelligence, mana) {
         super(health, strength, agility, intelligence, mana);
-
+        this._type = 'Wizard';
         this._health = 6;
         this._strength = 6;
         this._agility = 8;
@@ -91,9 +93,9 @@ class Wizard extends Character {
 };
 
 class Scout extends Character {
-    constructor(health, strength, agility, intelligence, mana) {
+    constructor(type, health, strength, agility, intelligence, mana) {
         super(health, strength, agility, intelligence, mana);
-
+        this._type = 'Scout';
         this._health = 5;
         this._strength = 5;
         this._agility = 10;
@@ -103,9 +105,9 @@ class Scout extends Character {
 };
 
 class Knight extends Character {
-    constructor(health, strength, agility, intelligence, mana) {
+    constructor(type, health, strength, agility, intelligence, mana) {
         super(health, strength, agility, intelligence, mana);
-
+        this._type = 'Knight';
         this._health = 10;
         this._strength = 10;
         this._agility = 6;
@@ -115,9 +117,9 @@ class Knight extends Character {
 };
 
 class Troubadour extends Character {
-    constructor(health, strength, agility, intelligence, mana) {
+    constructor(type, health, strength, agility, intelligence, mana) {
         super(health, strength, agility, intelligence, mana);
-
+        this._type = 'Troubadour';
         this._health = 7;
         this._strength = 5;
         this._agility = 10;
@@ -145,36 +147,42 @@ class Player {
     }
 
     createCard() {
-        let ranNum = Math.floor(Math.random() * 1);
-        if (ranNum === 1) {
-            newWarrior = new Warrior();
-            
-        }
-        return newWarrior;
+        let ranNum = Math.floor(Math.random() * 4);
+        if (ranNum === 0) {
+            let newWarrior = new Warrior();
+            return newWarrior;
+        } else if(ranNum === 1) {
+            let newWizard = new Wizard();
+            return newWizard;      
+        } else if (ranNum === 2) {
+            let newScout = new Scout();
+            return newScout;
+        } else if(ranNum === 3) {
+            let newKnight = new Knight();
+            return newKnight;
+        } else if(ranNum === 4) {
+            let newTroubadour = new Troubadour();
+            return newTroubadour;
+        } 
+
     }
 };
 
-const cardArr = [
-    new Warrior(),
-    new Wizard(),
-    new Scout(),
-    new Knight(),
-    new Troubadour()
-];
 
-function ranCard(arr) {
-    const ranNum = Math.floor(Math.random * arr.length - 1);
-    let card;
-    for (let i = 0; i < arr.length - 1; i++) {
-        if (ranNum === i) {
-            card = arr[i];
-        }
-        console.log(card)
-    }
+const playerOne = new Player(nameOne, true);
+const playerTwo = new Player(nameTwo, false);
 
+function play(par1, par2) {
+    let cardOne = par1.createCard();
+    let cardTwo = par2.createCard();
+    console.log(cardOne)
+    let keysOne = Object.keys(cardOne);
+    let entriesOne = Object.entries(cardOne)
+    console.log(entriesOne)
+    let ranNumOne = Math.floor(Math.random() * 5);
+    console.log(cardOne[entriesOne[ranNumOne]], cardOne[keysOne[ranNumOne]], ranNumOne);
     
 };
 
-const player = new Player();
-console.log(player.createCard())
+play(playerOne, playerTwo);
 
