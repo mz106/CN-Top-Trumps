@@ -177,10 +177,10 @@ function play(par1, par2) {
     let cardTwo = par2.createCard();
     console.log(cardOne)
     let keysOne = Object.keys(cardOne);
-    let entriesOne = Object.entries(cardOne)
-    console.log(entriesOne)
+    let valuesOne = Object.values(cardOne)
+    console.log(valuesOne)
     let ranNumOne = Math.floor(Math.random() * 5);
-    console.log(cardOne[entriesOne[ranNumOne]], cardOne[keysOne[ranNumOne]], ranNumOne);
+    console.log(cardOne[valuesOne[ranNumOne]], cardOne[keysOne[ranNumOne]], ranNumOne);
     
 };
 
